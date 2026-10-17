@@ -402,6 +402,7 @@
     $('enter').onclick = () => { sfx('click'); run.phase = run.resume || 'main'; persistRun(); renderRun(); };
   }
   function renderItem(it) {
+    if (window.innerWidth <= 860) { const sc = $('scene'); if (sc && sc.getBoundingClientRect().top < 0) sc.scrollIntoView({ block: 'start' }); }
     const sec = SEC[it.sec], inReview = run.phase === 'review';
     const head = `<div class="banner"><b>${esc(sec.t)}</b><small>${inReview ? '<span class="phase">مراجعة</span>' : ''}${esc(sec.ref || '')}</small></div>`;
     let body = '';

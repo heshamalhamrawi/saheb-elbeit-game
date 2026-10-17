@@ -1,5 +1,10 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1ab8d8">
 <title>صاحب البيت</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Great+Vibes&display=swap">
 <style>
@@ -341,7 +346,28 @@ code{background:var(--sky);color:var(--navy);border-radius:6px;padding:0 6px;fon
   .doors{grid-template-columns:1fr}
 }
 @media (max-width:480px){ .how{grid-template-columns:1fr} .rooms{grid-template-columns:repeat(2,minmax(0,1fr))} .room{min-height:120px} }
+
+/* ---- phone: everything fits the screen, less scrolling ---- */
+@media (max-width:560px){
+  .wrap,.app,main{padding-left:12px!important;padding-right:12px!important}
+  .bar{margin-bottom:6px;gap:6px}
+  .chips button,.chips .chip{font-size:12px;padding:4px 9px}
+  .hero h1{font-size:60px}
+  .hero p{font-size:15px;margin:6px 0 10px}
+  .home .coachbig img{height:150px}
+  .home .coachbig .badge{display:none}
+  .how{display:none}
+  .door{padding:14px 14px 12px;border-radius:20px}
+  .hero .door p{font-size:14px}
+  .coachbig img{height:min(32vh,240px)}
+  .coach{gap:6px;margin-bottom:4px}
+  .coach img{height:92px}
+  .coachsay{font-size:14px;padding:8px 12px}
+  .opt{font-size:15px}
+}
 </style>
+</head>
+<body>
 
 <div class="wrap" id="app">
   <div class="bar">
@@ -525,3 +551,6 @@ code{background:var(--sky);color:var(--navy);border-radius:6px;padding:0 6px;fon
 <script src="bank_diff.js" charset="utf-8"></script>
 <script src="cert_assets.js" charset="utf-8"></script>
 <script src="app.js" charset="utf-8"></script>
+
+</body>
+</html>
