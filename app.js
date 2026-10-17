@@ -714,7 +714,16 @@
         roomsDone: t(body.roomsDone), roomsTotal: t(body.roomsTotal), progress: t(body.progress), avg: t(body.avg),
         finalPct: body.final ? t(body.final.pct) : '', finalDate: body.final ? t(body.final.date) : '', certCount: t(body.certCount || 0),
         currentRoom: t(body.currentRoom), nopes: t(body.nopes || 0), startedAt: t(body.startedAt), updatedAt: t(body.updatedAt) };
-      writing = writing.then(() => fetch(CFG.excelUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(flat), keepalive: true })).catch(() => {});
+      const b = JSON.stringify(flat);
+      writing = writing.then(async () => {
+        // JSON first (Power Automate reads it as an object); if the browser blocks it, fall back to plain text
+        try {
+          const r = await fetch(CFG.excelUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: b });
+          if (!r.ok) console.warn('Excel flow', r.status, await r.text().catch(() => ''));
+          return;
+        } catch (e) {}
+        try { await fetch(CFG.excelUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: b, keepalive: true }); } catch (e) {}
+      }).catch(() => {});
     }
     if (CFG.resultsUrl) {
       // Google Sheet (Apps Script web app): plain-text POST avoids a CORS preflight; one row per HRID
